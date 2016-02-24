@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <title id="ewd-qoper8 Demo"></title>
+  </head>
+  <body>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+      var socket = io.connect();
+      socket.on('my-response', function (data) {
+        console.log('ewd-qoper8 message received: ' + JSON.stringify(data, null, 2));
+      });
+
+      function sendMessage() {
+        var message = {
+          type: 'testSocketRequest',
+          hello: 'world'
+        };
+        socket.emit('my-request', message);
+      }
+    </script>
+
+    <div>
+      <button onClick='sendMessage()'>Click me</button>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "ewd-qoper8",
+  "version": "1.0.0",
+  "description": "Queue & Child Process Management Facility",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/robtweed/ewd-qoper8.js.git"
+  },
+  "author": "Rob Tweed, M/Gateway Developments Ltd",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/robtweed/ewd-qoper8.js/issues"
+  },
+  "homepage": "https://github.com/robtweed/ewd-qoper8.js#readme"
+}
