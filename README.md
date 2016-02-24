@@ -12,22 +12,22 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ewd-qoper8 is a Node.js-based message queue module.  It provides you with:
 
-    a memory-based queue within your main process onto which you can add JSON messages
-    a pool of persistent child processes (aka worker processes) that run your message handler functions
-    a worker process pool manager that will start up and shut down worker processes based on demand
-    a dispatcher that processes the queue whenever a message is added to it, and attempts to send the message to an available worker process
+- a memory-based queue within your main process onto which you can add JSON messages
+- a pool of persistent child processes (aka worker processes) that run your message handler functions
+- a worker process pool manager that will start up and shut down worker processes based on demand
+- a dispatcher that processes the queue whenever a message is added to it, and attempts to send the message to an available worker process
 
 It differs from most other message queues by preventing a worker process from handling more than one message at a time.  This is by deliberate design.
 
 You determine the maximum size of the worker process pool.  If no free worker processes are available, messages will remain on the queue.  The queue is automatically processed whenever:
 
-    a new message is added to the queue
-    a worker process completes its processing of a message and returns itself to the available pool
+- a new message is added to the queue
+- a worker process completes its processing of a message and returns itself to the available pool
 
 The structure of messages is entirely up to you, but:
 
-    they are JavaScript objects
-    they should always have a type property
+- they are JavaScript objects
+- they should always have a type property
 
 How messages are handled within a worker process is up to you.  You define a handler method/function for each message type you expect to be added to the queue.
 
@@ -40,7 +40,7 @@ ewd-qoper8 is highly customisable.   For example, the master and/or worker proce
 ## Using ewd-qoper8
 
   Full details and documentation can be found at
-  [http://gradvs1.mgateway.com/download/ewd-federator.pdf](http://gradvs1.mgateway.com/download/ewd-qoper8.pdf)
+  [http://gradvs1.mgateway.com/download/ewd-qoper8.pdf](http://gradvs1.mgateway.com/download/ewd-qoper8.pdf)
 
 
 ## License
