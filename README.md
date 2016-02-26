@@ -1,7 +1,7 @@
 # ewd-qoper8: Node.js-based queue and multi-process manager
  
 Rob Tweed <rtweed@mgateway.com>  
-23 October 2014, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
+23 October 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
 
 Twitter: @rtweed
 
