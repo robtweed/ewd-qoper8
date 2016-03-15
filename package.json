@@ -1,6 +1,6 @@
 {
   "name": "ewd-qoper8",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "High-performance Queue and Multi-Process Management for Node.js",
   "main": "index.js",
   "scripts": {
