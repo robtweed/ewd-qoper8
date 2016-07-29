@@ -1,4 +1,4 @@
-# ewd-qoper8: Node.js-based queue and multi-process manager
+# ewd-qoper8: High-performance Node.js Message Queue
  
 Rob Tweed <rtweed@mgateway.com>  
 24 February 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
@@ -10,7 +10,7 @@ Google Group for discussions, support, advice etc: [http://groups.google.co.uk/g
 
 ## What is ewd-qoper8?
 
-ewd-qoper8 is a Node.js-based message queue module.  It provides you with:
+ewd-qoper8 is a generic, high-performance Node.js-based message queue module.  It provides you with:
 
 - a memory-based queue within your main process onto which you can add JSON messages
 - a pool of persistent child processes (aka worker processes) that run your message handler functions
