@@ -1,6 +1,6 @@
 {
   "name": "ewd-qoper8",
-  "version": "3.8.1",
+  "version": "3.9.0",
   "description": "High-performance Message Queue for Node.js",
   "main": "index.js",
   "scripts": {
