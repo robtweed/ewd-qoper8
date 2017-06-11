@@ -39,8 +39,7 @@ ewd-qoper8 is highly customisable.   For example, the master and/or worker proce
 	   
 ## Using ewd-qoper8
 
-  Full details and documentation can be found at
-  [http://gradvs1.mgateway.com/download/ewd-qoper8.pdf](http://gradvs1.mgateway.com/download/ewd-qoper8.pdf)
+  Full details and documentation can be found in the [https://github.com/chadmorrow/ewd-qoper8/blob/master/guide.md](Guide) file or at [http://gradvs1.mgateway.com/download/ewd-qoper8.pdf](http://gradvs1.mgateway.com/download/ewd-qoper8.pdf)
 
 
 ## License
