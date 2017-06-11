@@ -51,10 +51,10 @@ var q = new qoper8.masterProcess();
 console.log(q.version() + ' running in process ' + process.pid);
 q.start();
 ```
-*(You’ll find a copy of this in the /tests sub-folder within the ewd-qoper8 module folder - see test1.js)*
+*(You'll find a copy of this in the /tests sub-folder within the ewd-qoper8 module folder - see test1.js)*
 
 This example will start the ewd-qoper8 master process, with a worker process pool size of 1. It will
-then sit waiting for messages to be added to the queue - which isn’t going to happen in this script.
+then sit waiting for messages to be added to the queue - which isn't going to happen in this script.
 When ewd-qoper8 starts, it does not start any worker processes. A worker processes is only
 started when:
 - a message is added to the queue; AND
@@ -70,7 +70,7 @@ ewd-qoper8 is up and running. Max worker pool size: 1
 ========================================================
 ```
 
-Notice the second line of output: ewd-qoper8 always automatically creates a file containing the core worker process logic from which it bootstraps itself. However, since the test script doesn’t add any messages to ewd-qoper8’s queue, no worker processes are created and the master process will just sit waiting.
+Notice the second line of output: ewd-qoper8 always automatically creates a file containing the core worker process logic from which it bootstraps itself. However, since the test script doesn't add any messages to ewd-qoper8's queue, no worker processes are created and the master process will just sit waiting.
 To stop ewd-qoper8, just press CTRL & C within the process console, or send a SIGINT message
 from another process, eg:
 ```
@@ -89,11 +89,11 @@ setTimeout(function() {
  q.stop();
 }, 10000);
 ```
-This time, after 10 seconds you’ll now see ewd-qoper8 shut itself down
+This time, after 10 seconds you'll now see ewd-qoper8 shut itself down
 
 ## Testing Adding a Message to the ewd-qoper8 Queue
 
-You use ewd-qoper8’s `addToQueue()` method to add messages to the queue. Messages are JavaScript objects and should have a type property defined. The type value is entirely up to you. Defining a type assists in message and response handling. The built-in logging reports will assume your messages have a type property.
+You use ewd-qoper8's `addToQueue()` method to add messages to the queue. Messages are JavaScript objects and should have a type property defined. The type value is entirely up to you. Defining a type assists in message and response handling. The built-in logging reports will assume your messages have a type property.
 
 So we could do the following test (see test2.js in the /tests sub-folder):
 ```javascript
@@ -112,8 +112,8 @@ setTimeout(function() {
  q.stop();
 }, 10000);
 ```
-Any ewd-qoper8 activity should be defined within its ‘started’ event handler. In the example above you can see a message object being created and queued using `this.addToQueue()` within the
-q.on(‘started’) handler.
+Any ewd-qoper8 activity should be defined within its 'started' event handler. In the example above you can see a message object being created and queued using `this.addToQueue()` within the
+q.on('started') handler.
 
 Running the above script should produce output similar to the following:
 ```
@@ -141,21 +141,21 @@ No worker processes are running
 Master process will now shut down
 ```
 
-You’ll see that it reports starting a worker process to handle the message that was added to the queue - in this case with a process id (PID) of 12581.
+You'll see that it reports starting a worker process to handle the message that was added to the queue - in this case with a process id (PID) of 12581.
 
-As we’ve not yet specified a specific handler function for incoming messages, by default the worker process simply sends an error message back to the master process, which, as a result, returns the worker process to the available pool. The error message confirms that no handler was defined for the message.
+As we've not yet specified a specific handler function for incoming messages, by default the worker process simply sends an error message back to the master process, which, as a result, returns the worker process to the available pool. The error message confirms that no handler was defined for the message.
 
-Note that worker process 12581 is not shut down after it has finished handling the message, but persists, waiting and available for handling any future messages that are added to the queue (which, of course, in this example, doesn’t happen).
+Note that worker process 12581 is not shut down after it has finished handling the message, but persists, waiting and available for handling any future messages that are added to the queue (which, of course, in this example, doesn't happen).
 
 As in the previous example, after 10 seconds, ewd-qoper8 is instructed to shut down. This time you can see that the master process first signals the worker process to shut down, then waits for a few seconds before shutting itself down.
 
-If you leave ewd-qoper8 running, you’ll see it regularly reporting the duration that each worker process has been idle. If the default idle limit (1 hour, or 3,600,000ms) is exceeded, ewd-qoper8 will shut down the worker process. As soon as a new message is added to the queue, ewd-oper8 will immediately start a new worker process to handle it.
+If you leave ewd-qoper8 running, you'll see it regularly reporting the duration that each worker process has been idle. If the default idle limit (1 hour, or 3,600,000ms) is exceeded, ewd-qoper8 will shut down the worker process. As soon as a new message is added to the queue, ewd-oper8 will immediately start a new worker process to handle it.
 
-As before, if you don’t use ewd-qoper8’s `stop()` method within your script, CTRL&C or a SIGINT message will shut down ewd-qoper8.
+As before, if you don't use ewd-qoper8's `stop()` method within your script, CTRL&C or a SIGINT message will shut down ewd-qoper8.
 
 ## Handling Multiple Messages
 
-So far we’ve only queued a single message. It’s worth looking at what happens if multiple messages are added to the queue. The following example (see test3.js in the /tests folder) will
+So far we've only queued a single message. It's worth looking at what happens if multiple messages are added to the queue. The following example (see test3.js in the /tests folder) will
 queue two messages:
 ```javascript
 var qoper8 = require('ewd-qoper8');
@@ -212,7 +212,7 @@ Master process will now shut down
 
 Both messages are immediately added to the queue. Adding the first triggers a worker process to be started and the message is dispatched to the worker as soon as it has signalled back that it has started up and is ready for use.
 
-Because we haven’t specified otherwise, ewd-qoper8 defaults to a worker process pool size of 1, so the second message will remain on the queue until the single worker process (PID 12593 in this
+Because we haven't specified otherwise, ewd-qoper8 defaults to a worker process pool size of 1, so the second message will remain on the queue until the single worker process (PID 12593 in this
 above example) has finished handling the first message. As soon as the worker process becomes available, the second, queued message is dispatched to it for processing.
 
 This sequence will continue automatically until the queue is empty. Try editing the example script so that it adds more messages to the queue, and see what happens.
@@ -263,9 +263,9 @@ setTimeout(function() {
 }, 10000);
 ```
 
-The worker pool size is being increased to 2 within the `q.on(‘start’)` handler. Within the `q.on(‘started’)` handler, 5 messages are being queued. After 5 seconds, the q.getAllWorkerStats() method is invoked: this will ask each worker process to report back a number of vital statistics, including the number of messages it has processed.
+The worker pool size is being increased to 2 within the `q.on('start')` handler. Within the `q.on('started')` handler, 5 messages are being queued. After 5 seconds, the q.getAllWorkerStats() method is invoked: this will ask each worker process to report back a number of vital statistics, including the number of messages it has processed.
 
-Here’s an example of the output generated by this script:
+Here's an example of the output generated by this script:
 ```
 rrobtweed@ubuntu:~/qoper8$ sudo node node_modules/ewd-qoper8/lib/tests/test4
 Worker Bootstrap Module file written to node_modules/ewd-qoper8-worker.js
@@ -344,16 +344,16 @@ No worker processes are running
 Master process will now shut down
 ```
 
-This time you’ll see that ewd-qoper8 started 2 worker processes (PIds 12643 and 12644). In the example above, they handled 6 and 3 messages respectively. 
+This time you'll see that ewd-qoper8 started 2 worker processes (PIds 12643 and 12644). In the example above, they handled 6 and 3 messages respectively. 
 
-You’ll find that the balance of messages handled by each worker may vary each time you run the script: it takes time for each worker process to start up and become ready for handling messages, so the first one may have handled several messages before the second one is ready.
+You'll find that the balance of messages handled by each worker may vary each time you run the script: it takes time for each worker process to start up and become ready for handling messages, so the first one may have handled several messages before the second one is ready.
 
-You’re probably wondering why a total of 9 messages was handled by the worker processes when only 5 were added to the queue. The reason is that a message is sent to each worker as part of its
+You're probably wondering why a total of 9 messages was handled by the worker processes when only 5 were added to the queue. The reason is that a message is sent to each worker as part of its
 startup sequence, and another message was sent to each worker to ask for its vital statistics (as a result of running the `q.getAllWorkerStats()` method).
 
 ## Defining a Worker Process Message Handler
 
-In the examples above the worker processes have been applying a default “message” event handler. That’s what’s generating output lines such as this:
+In the examples above the worker processes have been applying a default “message” event handler. That's what's generating output lines such as this:
 ```
 master process received response from worker 12643:
 {"type":"testMessage1","finished":true,"message":{"error":"No handler found for testMessage1
@@ -365,12 +365,12 @@ You customise the behaviour of the worker processes by creating a Worker Handler
 Your module can define any of the following event handlers:
 - **start**: this will be invoked whenever a worker process starts, at the point at which it is ready for use
 - **stop**: this will be invoked just before a worker process closes down
-- **message**: this is invoked whenever a message is received by the worker. This is where you define your logic for handling all messages (with the exception of ewd-qoper8’s own control
+- **message**: this is invoked whenever a message is received by the worker. This is where you define your logic for handling all messages (with the exception of ewd-qoper8's own control
 messages)
 
 ### Example Worker Module
 
-Here’s a simple example of a worker module:
+Here's a simple example of a worker module:
 ```javascript
 module.exports = function() {
  this.on('start', function() {
@@ -391,33 +391,34 @@ module.exports = function() {
 You should always adhere to the pattern shown above:
 - create a function that is exported from the module
 - the function should have no arguments
-- within the function you can define any or all of the worker’s hander functions: `this.on(‘start’)`, `this.on(‘end’)` and `this.on(‘message’)` handler functions.
+- within the function you can define any or all of the worker's hander functions: `this.on('start')`, `this.on('end')` and `this.on('message')` handler functions.
 
 ## The start event handler
-The start event handler is where you can do things such as connect to databases or load other modules that you’ll need in your worker process.
+The start event handler is where you can do things such as connect to databases or load other modules that you'll need in your worker process.
 
-Within the handler’s callback function, `‘this’` provides you access to all the worker’s methods and properties.
-The `on(‘start’)` event’s callback function can take a single optional argument: `isFirst`
+Within the handler's callback function, `'this'` provides you access to all the worker's methods and properties.
+
+The `on('start')` event's callback function can take a single optional argument: `isFirst`
 
 This argument will be true if this is the first time a worker process has been started since ewdqoper8 itself was started. This is useful in situations where you want to initialise data in a database each time ewd-qoper8 is started, but before any subsequent activity occurs.
 
 ## The stop event handler
 
-Your stop event handler is where you can do things such as cleanly disconnect from databases or tidy up other resources before the worker process is terminated. Within the handler's callback function, `‘this’` provides you access to all the worker's methods and properties.
+Your stop event handler is where you can do things such as cleanly disconnect from databases or tidy up other resources before the worker process is terminated. Within the handler's callback function, `'this'` provides you access to all the worker's methods and properties.
 
 ## The message event handler
 
-The message event handler is where you’ll define how to process all incoming messages that you have added to the queue. How they are processed is entirely up to you.
+The message event handler is where you'll define how to process all incoming messages that you have added to the queue. How they are processed is entirely up to you.
 
 Its callback function provides three argument:
-- **messageObj**: the raw incoming message object, sent from the master process’s queue.
+- **messageObj**: the raw incoming message object, sent from the master process's queue.
 - **send**: a function that allows you to send a message to the master process without returning the
 worker back to the available pool
 - **finished**: a function that allows you to send a message to the master process, and signalling to
 the master process that you have finished using the worker. The worker will be returned back to the available pool
 
-Within the handler’s callback function, `‘this’` provides you access to all the worker’s methods and properties. What you do with the message within the worker process is entirely up to you.
-Once you’ve finished processing the message, you send the results back to the master process by invoking the `finished()` method.
+Within the handler's callback function, `'this'` provides you access to all the worker's methods and properties. What you do with the message within the worker process is entirely up to you.
+Once you've finished processing the message, you send the results back to the master process by invoking the `finished()` method.
 
 This takes a single argument:
 - **resultObj**: an object containing the results that are to be returned to the master process
@@ -431,11 +432,11 @@ process does not return the worker process to the available pool.
 By default, both the `send()` and `finished()` functions return to the master process a message whose type property is the same as that of the message being handled. You can optionally use
 the `send()` function to return messages with a different type property to the master process: to do this, simply define a type property in the `resultObj` object argument. Note that you cannot override the type property of the `finished()` function's result object.
 
-Make sure that your `on(‘message’)` handler logic always ends with an invocation of the `finished()` function, and only invoke it once - failure to do so will cause the worker process to not be released back to the available pool.
+Make sure that your `on('message')` handler logic always ends with an invocation of the `finished()` function, and only invoke it once - failure to do so will cause the worker process to not be released back to the available pool.
 
 ## Configuring ewd-qoper8 To Use Your Worker Handler Module
 
-You instruct ewd-qoper8 to load your worker module by setting the property `this.worker.module` from within the on(‘start’) method handler. The module you specify will be loaded (using require()) into each worker process when it is started.
+You instruct ewd-qoper8 to load your worker module by setting the property `this.worker.module` from within the on('start') method handler. The module you specify will be loaded (using require()) into each worker process when it is started.
 
 For example, if you saved your module in `./node_modules/exampleModule.js`, then you instruct ewd-qoper8 to load it as follows, eg:
 ```javascript
@@ -444,7 +445,7 @@ q.on('start', function() {
 });
 ```
 
-If your module is saved elsewhere, modify the module path accordingly. For example if you look at the example script test5.js in the /tests folder, you’ll see that it specifies:
+If your module is saved elsewhere, modify the module path accordingly. For example if you look at the example script test5.js in the /tests folder, you'll see that it specifies:
 
 ```javascript
 q.on('start', function() {
@@ -455,10 +456,10 @@ q.on('start', function() {
 Try running the test5.js script to see the effect of this module on the messages returned to the master process.
 
 ## Handling the Results Object Returned from a Worker
-When a results object is returned from a Worker process, you normally define how the master process should handle it. So far we’ve been letting ewd-qoper8’s default action to take place,
+When a results object is returned from a Worker process, you normally define how the master process should handle it. So far we've been letting ewd-qoper8's default action to take place,
 which is to simply report the returned result message to the console.
 
-The basic mechanism for handling messages returned by worker processes is to define an `on(‘response’)` handler, eg:
+The basic mechanism for handling messages returned by worker processes is to define an `on('response')` handler, eg:
 
 ```javascript
 q.on('response', function(responseObj, pid) {
@@ -466,14 +467,14 @@ q.on('response', function(responseObj, pid) {
 });
 ```
 
-As you can see above, the on(‘response’) handler callback function provides two arguments:
+As you can see above, the on('response') handler callback function provides two arguments:
 - **resultsObj**: the raw incoming results object, sent from the worker process.
 - **pid**: the process Id of the worker that handled the original message and sent this response
 
-How you handle each returned message and what you do with it is up to you. Within the `on(‘response’)` handler’s callback function, `‘this’` provides access to all of the master process’s
+How you handle each returned message and what you do with it is up to you. Within the `on('response')` handler's callback function, `'this'` provides access to all of the master process's
 properties and methods.
 
-Note that your `on(‘response’)` handler function method intercepts all messages returned by worker processes, including ewd-qoper8’s own ones. You’ll be able to distinguish them because their type will have ‘qoper8-‘ as a prefix.
+Note that your `on('response')` handler function method intercepts all messages returned by worker processes, including ewd-qoper8's own ones. You'll be able to distinguish them because their type will have 'qoper8-' as a prefix.
 
 For a worked example, take a look at test6.js in the /tests folder:
 ```javascript
@@ -511,7 +512,7 @@ setTimeout(function() {
 
 ## Simpler Message Handling with the handleMessage Function
 
-Although the `addMessage()` method and the `on(‘response’)` event provide the basic mechanisms for handling messages within the ewd-qoper8 master process, the `handleMessage()` method
+Although the `addMessage()` method and the `on('response')` event provide the basic mechanisms for handling messages within the ewd-qoper8 master process, the `handleMessage()` method
 provides a much simpler and slicker mechanism.
 
 The `handleMessage()` function has two arguments:
@@ -551,7 +552,7 @@ setTimeout(function() {
  q.stop();
 }, 10000);
 ```
-Here’s the `on(‘message’)` handler in the worker module for this example:
+Here's the `on('message')` handler in the worker module for this example:
 ```javascript
  this.on('message', function(messageObj, send, finished) {
  send({
@@ -567,19 +568,19 @@ Here’s the `on(‘message’)` handler in the worker module for this example:
  });
  ```
 
-Notice the way this is sending messages using both the `send()` and `finished()` functions. Both will be intercepted by the `handleMessage()` function’s callback.
+Notice the way this is sending messages using both the `send()` and `finished()` functions. Both will be intercepted by the `handleMessage()` function's callback.
 
 ## Customising What Happens to the Master Process When it is Started
 
-You’ve already seen how the `q.on(‘start’)` event can be used to over-ride default properties such as the worker pool size and to specify the path of your worker module.
+You've already seen how the `q.on('start')` event can be used to over-ride default properties such as the worker pool size and to specify the path of your worker module.
 
-The `on(‘start’)` event is also where you can customise your master process, for example if you want to connect it to a database and load other modules. You can augment the master process’s properties and methods from within this event’s callback function: simply augment `‘this’`.
+The `on('start')` event is also where you can customise your master process, for example if you want to connect it to a database and load other modules. You can augment the master process's properties and methods from within this event's callback function: simply augment `'this'`.
 
 ## Customising What Happens to the Master Process When it is Stopped
 
 You can optionally intercept the ewd-qoper8 master process shut-down sequence, allowing you to release and tidy up resources, and shut down any linked services tidily.
 
-You can do this by handling the on(‘stop’) event e.g.:
+You can do this by handling the on('stop') event e.g.:
 ```javascript
 var qoper8 = require('ewd-qoper8');
 var q = new qoper8.masterProcess();
@@ -588,12 +589,12 @@ q.on('stop', function() {
 });
 q.start();
 ```
-Within the `‘stop’` event handler’s callback function, `‘this’` provides access to all the master process’s properties and methods.
+Within the `'stop'` event handler's callback function, `'this'` provides access to all the master process's properties and methods.
 
 ## Examples Included with ewd-qoper8
-You’ll find a number of example scripts in the `/lib/tests` folder within your `node_modules/ewdqoper8` directory.
+You'll find a number of example scripts in the `/lib/tests` folder within your `node_modules/ewdqoper8` directory.
 
-To run them, ensure you’re in the directory that you’d been in when you first installed ewd-qoper8.
+To run them, ensure you're in the directory that you'd been in when you first installed ewd-qoper8.
 
 From that directory, you can invoke the command:
 ```
@@ -628,18 +629,18 @@ The default values, if not specified as command line parameters are:
 - pause between each batch: 51ms
 
 When you run the benchmark, it will show you if the queue continues to grow, or any time the queue is exhausted. Maximum throughput will be achieved if you can approximate a steady-state
-whereby the queue doesn’t exceed 2,000 - 3,000 and it is never exhausted. You should also find that maximum throughput will be when the number of worker processes plus the master process
+whereby the queue doesn't exceed 2,000 - 3,000 and it is never exhausted. You should also find that maximum throughput will be when the number of worker processes plus the master process
 equals the number of CPU cores available. Use the defaults as starting points.
 
 If you find that the queue just keeps building up throughout a run, increase the pause between batches. This will allow ewd-qoper8 to consume more of the queued messages before a next
 batch is added.
 
-Conversely, if you see lots of reports of the queue being exhausted during a run, decrease the pause between batches, so you’re topping up the queue as fast as it is being consumed.
+Conversely, if you see lots of reports of the queue being exhausted during a run, decrease the pause between batches, so you're topping up the queue as fast as it is being consumed.
 
-The default queue used by ewd-qoper8 is simply a JavaScript array. JavaScript performance when processing arrays decreases as array size increases, so it’s a good idea to try to maintain as
+The default queue used by ewd-qoper8 is simply a JavaScript array. JavaScript performance when processing arrays decreases as array size increases, so it's a good idea to try to maintain as
 small a queue size as possible for maximum throughput.
 
-Here’s some examples of how to run the benchmark:
+Here's some examples of how to run the benchmark:
 ```
 node node_modules/ewd-qoper8/lib/tests/benchmark
 - no of workers: 1
@@ -682,10 +683,10 @@ By way of reference, running with the defaults on a Ubuntu 14.04 64-bit virtual 
 ewd-qoper8 is not really designed to be a standalone module. More sensibly, it is designed to be used in conjunction with a server module of some sort. The very popular and increasingly standard web server module Express is a good example of something with
 which ewd-qoper8 can be easily integrated.
 
-So, for example, ewd-qoper8’s worker processes can be used to handle incoming HTTP requests, with the output from your worker-process module message handlers being
+So, for example, ewd-qoper8's worker processes can be used to handle incoming HTTP requests, with the output from your worker-process module message handlers being
 returned to the browser or web server client.
 
-Here’s a simple example of ewd-qoper8 working with Express. You’ll find this in the /tests directory - look for express1.js:
+Here's a simple example of ewd-qoper8 working with Express. You'll find this in the /tests directory - look for express1.js:
 ```javascript
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -710,7 +711,7 @@ q.on('started', function() {
 q.start();
 ```
 This example will start ewd-qoper8, and when it has started and ready, it will start Express, listening on port 8080. It also sets the worker module file to be the express-module.js file
-that you’ll also find in the /tests folder.
+that you'll also find in the /tests folder.
 
 The example worker module is pretty simple, just echoing back the incoming message and adding a few properties of its own:
 ```javascript
@@ -728,9 +729,9 @@ module.exports = function() {
 ```
 
 Express will be watching for incoming HTTP POST requests with a URL path of /qoper8. The body of these requests will contain a JSON payload. Note the use of the standard bodyParser.json middleware to parse the JSON and make it available as req.body.
-This JSON payload is then handled by ewd-qoper8’s standard `handleMessage()` function.
+This JSON payload is then handled by ewd-qoper8's standard `handleMessage()` function.
 
-This queues the message and awaits the response from the ewd-qoper8 worker process to which the message was dispatched. The returned result object is provided to you in its callback function which then uses Express’s `res.send()` method to return it to the client.
+This queues the message and awaits the response from the ewd-qoper8 worker process to which the message was dispatched. The returned result object is provided to you in its callback function which then uses Express's `res.send()` method to return it to the client.
 
 Try using a REST client (eg the Chrome Advanced REST Client extension), and POST to the URL /qoper8 a JSON payload such as this (Make sure the Content-Type is set to application/json):
 ```
@@ -760,7 +761,7 @@ To make integration with Express even easier and more powerful, you can install 
 ```
 npm install ewd-qoper8-express
 ```
-You’ll find an example of how to use this in ewd-qoper’s /tests directory: look for the file express2.js. You’ll see that it contains the following:
+You'll find an example of how to use this in ewd-qoper's /tests directory: look for the file express2.js. You'll see that it contains the following:
 ```javascript
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -783,7 +784,7 @@ q.on('started', function() {
 q.start();
 ```
 
-Note the way you add ewd-qoper8-express to ewd-qoper8’s master process:
+Note the way you add ewd-qoper8-express to ewd-qoper8's master process:
 ```javascript
 var qx = require('ewd-qoper8-express');
 var q = new qoper8.masterProcess();
@@ -795,9 +796,9 @@ ewd-qoper8-express provides us with a special version of the `handleMessage()` m
 qx.handleMessage(req, res);
 ```
 
-This example is using the same worker module as before, so it should just echo back the request generated by ewd-qoper8-express’s handleMessage method.
+This example is using the same worker module as before, so it should just echo back the request generated by ewd-qoper8-express's handleMessage method.
 
-Start up the express2.js example and try POST’ing the same request as before. You should get a response back such as this:
+Start up the express2.js example and try POST'ing the same request as before. You should get a response back such as this:
 ```
 {
  "youSent": {
@@ -830,8 +831,8 @@ Start up the express2.js example and try POST’ing the same request as before. 
  "time": "Wed Mar 02 2016 06:33:35 GMT+0000 (GMT)"
 }
 ```
-You can see at once that the message that was constructed from Express’s req object is much more complex than before (see the youSent part of the message, shown in bold):
-- **type**: this is set to ‘ewd-qoper8-express’
+You can see at once that the message that was constructed from Express's req object is much more complex than before (see the youSent part of the message, shown in bold):
+- **type**: this is set to 'ewd-qoper8-express'
 - **method**: matches the HTTP method
 - **headers**: contains the HTTP request headers (req.headers)
 - **params**: contains any req.params properties
@@ -845,7 +846,7 @@ ewd-qoper8-express also provides a special worker-side method to make things sim
 
 You add this to your worker using the following:
 ```javascript
-var handleExpressMessage = require(‘ewd-qoper8-express').workerMessage;
+var handleExpressMessage = require('ewd-qoper8-express').workerMessage;
 ```
 Take a look at the example worker process named express-module2.js in the ewd-qoper8/tests directory:
 ```javascript
@@ -880,13 +881,13 @@ finished);
 };
 ```
 
-This loads the ewd-qoper8-express worker method and applies it within the `on(‘message’)` handler:
+This loads the ewd-qoper8-express worker method and applies it within the `on('message')` handler:
 
 ```javascript
 var expressMessage = handleExpressMessage.call(this, messageObj, send, finished);
 ```
 
-What this does is to filter out all incoming messages with a type of ‘ewd-qoper8-express’ and generates a new event named ‘expressMessage’. You can see the handler for this message in the above example:
+What this does is to filter out all incoming messages with a type of 'ewd-qoper8-express' and generates a new event named 'expressMessage'. You can see the handler for this message in the above example:
 ```javascript
  this.on('expressMessage', function(messageObj, send, finished) {..}
 ```
@@ -939,15 +940,15 @@ q.start();
 
 POSTing a /qoper8 URL will send an ewd-qoper8-epress formatted message to the worker module (express-module2).
 
-However, sending /qoper8/test as a GET request will generate a manually-constructed message with a type of ‘non-express-message’ which will be handled as differently within the worker module. Sending /qoper8/fail as a GET request will return a “No handler found’ error response.
+However, sending /qoper8/test as a GET request will generate a manually-constructed message with a type of 'non-express-message' which will be handled as differently within the worker module. Sending /qoper8/fail as a GET request will return a “No handler found' error response.
 
 ## Sending Error Responses from your Worker Module
-Whether or not you’re handling the special ewd-qoper8-express messages within your worker module, if you’ve added the ewd-qoper8-express module to your master process, you can very simply generate error responses that will be treated as such by Express.
+Whether or not you're handling the special ewd-qoper8-express messages within your worker module, if you've added the ewd-qoper8-express module to your master process, you can very simply generate error responses that will be treated as such by Express.
 
 In your worker module message handlers, simply structure and send your error responses as follows:
 ```javascript
 var response = {
- error: ‘Some error message’
+ error: 'Some error message'
 };
 finished(response);
 ```
@@ -960,7 +961,7 @@ Express will send out an error response with an HTTP status code of 400 with the
 If you want Express to use a different status code, simply define it in the response as in this example that generates a status code of 500:
 ```javascript
 var response = {
- error: ‘Something went wrong on the server!’,
+ error: 'Something went wrong on the server!',
  status: {code: 500}
 };
 finished(response);
@@ -968,7 +969,7 @@ finished(response);
 
 If you want to generate a standard ewd-qoper8 "No handler was found for this message" error response, you can simply do the following in your message handler:
 ```javascript
-this.emit(‘unknownMessage’, messageObj, send, finished);
+this.emit('unknownMessage', messageObj, send, finished);
 Take a look at express4.js in the ewd-qoper8 /tests directory:
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -1025,7 +1026,7 @@ module.exports = function() {
 Try the following GET requests:
 - /qoper8/pass should echo back your original message
 - /qoper8/fail should return a 403 error
-- /qoper8/nohandler should return a 400 ‘No handler found’ error
+- /qoper8/nohandler should return a 400 'No handler found' error
 
 ## Express Router
 ewd-qoper8-express also provides a pre-packaged version of Express Router. Simply use it as follows:
@@ -1034,7 +1035,7 @@ app.use('/vista', qx.router());
 ```
 This incorporates the `qx.handleMessage` function behind the scenes, so provides all its capabilities to your specified routing.
 
-Take a look at express4.js in ewd-qoper8’s /test directory:
+Take a look at express4.js in ewd-qoper8's /test directory:
 ```javascript
 var express = require('express');
 var bodyParser = require('body-parser');
@@ -1051,7 +1052,7 @@ q.on('started', function() {
 });
 q.start();
 ```
-This example uses the simple worker module express-module.js which just echoes back all the messages you send. You’ll now see that any requests (GET, POST etc) that start with /qoper8 will be sent as ewd-qoper8-express formatted messages to your worker module.
+This example uses the simple worker module express-module.js which just echoes back all the messages you send. You'll now see that any requests (GET, POST etc) that start with /qoper8 will be sent as ewd-qoper8-express formatted messages to your worker module.
 
 So, for example, a GET request to /qoper8/testing/a/b?hello=world
 will return a response similar to this:
@@ -1089,7 +1090,7 @@ will return a response similar to this:
 }
 ```
 Notice that the path element following the /qoper8 root is available to you in your worker module message handler as `messageObj.params.type`. The /x/y elements are available in
-`messageObj.params[‘0’]`.
+`messageObj.params['0']`.
 
 Also notice that the URL query string `?hello=world` is available as `messageObj.query.hello`.
 
@@ -1127,7 +1128,7 @@ For simplicity, this example uses the same worker module as before that just ech
 socket.emit('my-response', resultObj);
 ```
 
-In order to test this example, you need to load an HTML file - there’s one already created in the /test folder (index.html). If you start the express6.js script and put the following URL into a browser: <http://192.168.1.193:8080/> (change the IP address as appropriate), it should load the index.html page. This loads the client-side socket.io library and otherwise just contains a button that contains the text “Click Me”:
+In order to test this example, you need to load an HTML file - there's one already created in the /test folder (index.html). If you start the express6.js script and put the following URL into a browser: <http://192.168.1.193:8080/> (change the IP address as appropriate), it should load the index.html page. This loads the client-side socket.io library and otherwise just contains a button that contains the text “Click Me”:
 ```html
 <html>
  <head>
@@ -1155,7 +1156,7 @@ In order to test this example, you need to load an HTML file - there’s one alr
 </html>
 ```
 
-When the button is clicked it will send a web socket message to Express/socket.io, and will show the returned response web socket message in the browser’s Javascript console. It should look something like this:
+When the button is clicked it will send a web socket message to Express/socket.io, and will show the returned response web socket message in the browser's Javascript console. It should look something like this:
 ```
 ewd-qoper8 message received: {
  "type": "testSocketRequest",
@@ -1188,7 +1189,7 @@ module.exports = function() {
 
 };
 ```
-This time, every time the button is clicked in the index.html file, you should see two messages arriving in the browser’s JavaScript console:
+This time, every time the button is clicked in the index.html file, you should see two messages arriving in the browser's JavaScript console:
 ```
 ewd-qoper8 message received: {
  "type": "testSocketRequest",
@@ -1209,4 +1210,4 @@ ewd-qoper8 message received: {
  }
 }
 ```
-Intermediate messages should be sent using the `send()` function to ensure that the master process doesn’t return the child process to the available pool.
+Intermediate messages should be sent using the `send()` function to ensure that the master process doesn't return the child process to the available pool.
