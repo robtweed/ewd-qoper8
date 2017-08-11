@@ -1,7 +1,7 @@
 # ewd-qoper8: High-performance Node.js Message Queue
 
-[![Build Status](https://travis-ci.org/robtweed/ewd-qoper8.svg?branch=tests)](https://travis-ci.org/robtweed/ewd-qoper8)
-[![Coverage Status](https://coveralls.io/repos/github/robtweed/ewd-qoper8/badge.svg?branch=tests)](https://coveralls.io/github/robtweed/ewd-qoper8?branch=tests)
+[![Build Status](https://travis-ci.org/robtweed/ewd-qoper8.svg?branch=master)](https://travis-ci.org/robtweed/ewd-qoper8)
+[![Coverage Status](https://coveralls.io/repos/github/robtweed/ewd-qoper8/badge.svg?branch=master)](https://coveralls.io/github/robtweed/ewd-qoper8?branch=master)
 
 Rob Tweed <rtweed@mgateway.com>  
 24 February 2016, M/Gateway Developments Ltd [http://www.mgateway.com](http://www.mgateway.com)  
