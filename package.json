@@ -3,7 +3,7 @@
   "version": "3.14.0",
   "config": {
     "date": "15 August 2017"
-  }
+  },
   "description": "High-performance Message Queue for Node.js",
   "main": "index.js",
   "scripts": {
