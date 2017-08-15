@@ -158,6 +158,10 @@ describe(' - unit/ewd-qoper:', function () {
         });
       });
 
+      it('should have exitOnStop prop', function () {
+        expect(masterProcess.exitOnStop).toBeTruthy();
+      });
+
       it('should have master prop', function () {
         expect(masterProcess.master).toEqual({});
       });

@@ -17,6 +17,7 @@ describe(' - unit/master/proto/stop:', function () {
     WorkerProcess.prototype.constructor = WorkerProcess;
 
     MasterProcess = function () {
+      this.exitOnStop = true;
       this.shutdownDelay = 5000;
       this.emit = jasmine.createSpy();
       this.getWorkerPids = jasmine.createSpy();
@@ -102,7 +103,7 @@ describe(' - unit/master/proto/stop:', function () {
       expect(masterProcess.stopWorker.calls.argsFor(1)).toEqual(['10200']);
     });
 
-    describe('When all worker processes stopped successfully', function () {
+    describe('and all worker processes stopped successfully', function () {
       it('should shutdown master process', function () {
         // ARRANGE
         spyOn(process, 'exit');
@@ -116,9 +117,28 @@ describe(' - unit/master/proto/stop:', function () {
         expect(masterProcess.emit).toHaveBeenCalledWith('stop');
         expect(process.exit).toHaveBeenCalled();
       });
+
+      describe('and exitOnStop is disabled', function () {
+        beforeEach(function () {
+          masterProcess.exitOnStop = false;
+        });
+
+        it('should NOT run process exit', function () {
+          // ARRANGE
+          spyOn(process, 'exit');
+
+          // ACT
+          masterProcess.stop();
+          masterProcess.worker.process[10100].emit('exit');
+          masterProcess.worker.process[10200].emit('exit');
+
+          // ASSERT
+          expect(process.exit).not.toHaveBeenCalled();
+        });
+      });
     });
 
-    describe('When at least one worker processes NOT stopped successfully', function () {
+    describe('and at least one worker processes NOT stopped successfully', function () {
       it('should shutdown master process anyway', function () {
         // ARRANGE
         spyOn(process, 'exit');
@@ -131,6 +151,25 @@ describe(' - unit/master/proto/stop:', function () {
         // ASSERT
         expect(masterProcess.emit).toHaveBeenCalledWith('stop');
         expect(process.exit).toHaveBeenCalled();
+      });
+
+      describe('and exitOnStop is disabled', function () {
+        beforeEach(function () {
+          masterProcess.exitOnStop = false;
+        });
+
+        it('should NOT run process exit', function () {
+          // ARRANGE
+          spyOn(process, 'exit');
+
+          // ACT
+          masterProcess.stop();
+          masterProcess.worker.process[10100].emit('exit');
+          jasmine.clock().tick(masterProcess.shutdownDelay + 100);
+
+          // ASSERT
+          expect(process.exit).not.toHaveBeenCalled();
+        });
       });
     });
   });
