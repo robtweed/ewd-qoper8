@@ -10,6 +10,7 @@ Twitter: @rtweed
 
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
+Thanks to Alexey Kucherenko for Tests
 
 ## What is ewd-qoper8?
 
