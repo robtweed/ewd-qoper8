@@ -7,11 +7,16 @@
   "description": "High-performance Message Queue for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/jasmine-node/bin/jasmine-node spec/"
-
-  },
-  "devDependencies": {
-    "jasmine-node": ""
+    "lint": "jshint spec",
+    "test": "npm run test:unit",
+    "test:unit": "jasmine --config=spec/support/unit.json",
+    "test:integration": "jasmine --config=spec/support/integration.json",
+    "coverage:clean": "rm -rf ./coverage",
+    "coverage:unit": "istanbul cover jasmine -- --config=spec/support/unit.json",
+    "coverage:integration": "istanbul cover jasmine -- --config=spec/support/integration.json",
+    "coveralls:unit": "npm run coverage:unit && coveralls < coverage/lcov.info",
+    "coveralls:integration": "npm run coverage:integration && coveralls < coverage/lcov.info",
+    "coveralls": "npm run coverage:clean && npm run coveralls:unit && npm run coveralls:integration"
   },
   "repository": {
     "type": "git",
@@ -22,5 +27,18 @@
   "bugs": {
     "url": "https://github.com/robtweed/ewd-qoper8/issues"
   },
-  "homepage": "https://github.com/robtweed/ewd-qoper8#readme"
+  "homepage": "https://github.com/robtweed/ewd-qoper8#readme",
+  "devDependencies": {
+    "coveralls": "^2.13.1",
+    "istanbul": "^0.4.5",
+    "jasmine": "^2.7.0",
+    "jasmine-spec-reporter": "^4.1.1",
+    "jshint": "^2.9.5",
+    "pre-commit": "^1.2.2",
+    "rewire": "^2.5.2"
+  },
+  "pre-commit": [
+    "lint",
+    "test:unit"
+  ]
 }
