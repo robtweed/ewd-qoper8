@@ -28,7 +28,7 @@ describe(' - unit/worker/proto/getStats:', function () {
     // ASSERT
     expect(actual).toEqual({
       pid: process.pid,
-      upTime: '2 days 12:00:00',
+      uptime: '2 days 12:00:00',
       noOfMessages: 1,
       memory: {
         rss: '200.00',
