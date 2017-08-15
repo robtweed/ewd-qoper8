@@ -1,10 +1,17 @@
 {
   "name": "ewd-qoper8",
-  "version": "3.13.0",
+  "version": "3.14.0",
+  "config": {
+    "date": "15 August 2017"
+  }
   "description": "High-performance Message Queue for Node.js",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "./node_modules/jasmine-node/bin/jasmine-node spec/"
+
+  },
+  "devDependencies": {
+    "jasmine-node": ""
   },
   "repository": {
     "type": "git",
