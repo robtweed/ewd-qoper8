@@ -54,7 +54,7 @@ describe(' - unit/worker/proto/init:', function () {
   describe('workerListeners', function () {
     describe('workerModule', function () {
       beforeEach(function () {
-        var workerModule = path.join(process.cwd(), 'spec/fixtures/worker-module');
+        var workerModule = path.join(process.cwd(), 'spec/unit/fixtures/worker-module');
         process.argv = ['node', 'test.js', workerModule];
       });
 
@@ -77,7 +77,7 @@ describe(' - unit/worker/proto/init:', function () {
 
     describe('workerSubModule', function () {
       beforeEach(function () {
-        var workerSubModule = path.join(process.cwd(), 'spec/fixtures/worker-sub-module.handler');
+        var workerSubModule = path.join(process.cwd(), 'spec/unit/fixtures/worker-sub-module.handler');
         process.argv = ['node', 'test.js', workerSubModule];
       });
 
