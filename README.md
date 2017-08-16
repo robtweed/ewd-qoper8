@@ -10,7 +10,8 @@ Twitter: @rtweed
 
 Google Group for discussions, support, advice etc: [http://groups.google.co.uk/group/enterprise-web-developer-community](http://groups.google.co.uk/group/enterprise-web-developer-community)
 
-Thanks to Alexey Kucherenko for Tests
+Thanks to [Alexey Kucherenko](https://github.com/killmenot) for development of unit and integration tests,
+ with support from the [Ripple Foundation](http://rippleosi.org).
 
 ## What is ewd-qoper8?
 
