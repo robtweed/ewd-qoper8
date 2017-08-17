@@ -56,6 +56,10 @@ describe(' - unit/ewd-qoper:', function () {
         expect(masterProcess.log).toBeTruthy();
       });
 
+      it('should have checkWorkerPoolDelay prop', function () {
+        expect(masterProcess.checkWorkerPoolDelay).toBe(300000);
+      });
+
       it('should have shutdownDelay prop', function () {
         expect(masterProcess.shutdownDelay).toBe(20000);
       });

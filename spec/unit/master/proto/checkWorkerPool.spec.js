@@ -6,6 +6,7 @@ describe(' - unit/master/proto/checkWorkerPool:', function () {
 
   beforeAll(function () {
     MasterProcess = function () {
+      this.checkWorkerPoolDelay = 5 * 60 * 1000;
       this.worker = {
         list: [10100, 10200],
         idleLimit: 20 * 60 * 1000,
