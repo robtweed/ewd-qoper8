@@ -71,6 +71,6 @@ describe(' - unit/master/proto/stopWorker:', function () {
     masterProcess.stopWorker(pid);
 
     // ASSERT
-    expect(masterProcess.worker.list).toEqual(['10200']);
+    expect(masterProcess.worker.list).toEqual([10200]);
   });
 });
