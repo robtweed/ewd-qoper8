@@ -9,4 +9,5 @@ node_modules/
 *.sublime-*
 
 # Coverage
+.nyc_output
 coverage
