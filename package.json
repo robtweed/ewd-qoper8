@@ -46,8 +46,5 @@
   "pre-commit": [
     "lint",
     "test:unit"
-  ],
-  "dependencies": {
-    "childprocess": "^2.0.2"
-  }
+  ]
 }
