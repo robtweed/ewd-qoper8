@@ -1,6 +1,6 @@
 var version = require('../../../../lib/master/proto/version');
 
-describe(' - unit/master/proto/version:', function () {
+describe('unit/master/proto/version:', function () {
   var MasterProcess;
   var masterProcess;
 

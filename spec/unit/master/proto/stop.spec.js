@@ -1,7 +1,7 @@
 var events = require('events');
 var stop = require('../../../../lib/master/proto/stop');
 
-describe(' - unit/master/proto/stop:', function () {
+describe('unit/master/proto/stop:', function () {
   var WorkerProcess;
   var MasterProcess;
   var masterProcess;

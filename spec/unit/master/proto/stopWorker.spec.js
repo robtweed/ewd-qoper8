@@ -1,6 +1,6 @@
 var stopWorker = require('../../../../lib/master/proto/stopWorker');
 
-describe(' - unit/master/proto/stopWorker:', function () {
+describe('unit/master/proto/stopWorker:', function () {
   var WorkerProcess;
   var MasterProcess;
   var workerProcess1;
@@ -50,6 +50,17 @@ describe(' - unit/master/proto/stopWorker:', function () {
     expect(workerProcess1.send).toHaveBeenCalledWith({
       type: 'qoper8-exit'
     });
+  });
+
+  it('should not signalling worker to stop', function () {
+    // ARRANGE
+    var pid = 10300;
+
+    // ACT
+    masterProcess.stopWorker(pid);
+
+    // ASSERT
+    expect(workerProcess1.send).not.toHaveBeenCalled();
   });
 
   it('should delete worker process', function () {

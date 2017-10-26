@@ -2,21 +2,29 @@ var events = require('events');
 var rewire = require('rewire');
 var qoper8 = rewire('../../lib/ewd-qoper8');
 
-describe(' - unit/ewd-qoper:', function () {
-  var revertBuild;
-  var reverLoaderFile;
+describe('unit/ewd-qoper:', function () {
+  var build;
+  var loaderFile;
+
+  var revert = function (obj) {
+    obj.__revert__();
+    delete obj.__revert__;
+  };
 
   beforeEach(function () {
-    revertBuild = qoper8.__set__('build', {
+    build = {
       no: 'x.x.x',
       date: '1 January 1970'
-    });
-    reverLoaderFile = qoper8.__set__('loaderFile', ['loader file']);
+    };
+    build.__revert__ = qoper8.__set__('build', build);
+
+    loaderFile = ['loader file'];
+    loaderFile.__revert__ = qoper8.__set__('loaderFile', loaderFile);
   });
 
   afterEach(function () {
-    revertBuild();
-    reverLoaderFile();
+    revert(build);
+    revert(loaderFile);
   });
 
   describe('masterProcess', function () {
@@ -46,10 +54,12 @@ describe(' - unit/ewd-qoper:', function () {
       });
 
       it('should have build prop', function () {
-        expect(masterProcess.build).toEqual({
-          no: 'x.x.x',
-          date: '1 January 1970'
-        });
+        expect(masterProcess.build).toEqual(
+          jasmine.objectContaining({
+            no: 'x.x.x',
+            date: '1 January 1970'
+          })
+        );
       });
 
       it('should have log prop', function () {
@@ -78,7 +88,9 @@ describe(' - unit/ewd-qoper:', function () {
         });
 
         it('should have loaderText prop', function () {
-          expect(masterProcess.worker.loaderText).toEqual(['loader file']);
+          expect(masterProcess.worker.loaderText).toEqual(
+            jasmine.arrayContaining(['loader file'])
+          );
         });
 
         it('should have process prop', function () {
@@ -378,10 +390,12 @@ describe(' - unit/ewd-qoper:', function () {
       });
 
       it('should have build prop', function () {
-        expect(workerProcess.build).toEqual({
-          no: 'x.x.x',
-          date: '1 January 1970'
-        });
+        expect(workerProcess.build).toEqual(
+          jasmine.objectContaining({
+            no: 'x.x.x',
+            date: '1 January 1970'
+          })
+        );
       });
 
       it('should have isFirst prop', function () {

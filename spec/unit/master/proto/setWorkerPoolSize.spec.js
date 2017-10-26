@@ -1,6 +1,6 @@
 var setWorkerPoolSize = require('../../../../lib/master/proto/setWorkerPoolSize');
 
-describe(' - unit/master/proto/setWorkerPoolSize:', function () {
+describe('unit/master/proto/setWorkerPoolSize:', function () {
   var MasterProcess;
   var masterProcess;
 

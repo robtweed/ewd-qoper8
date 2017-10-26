@@ -1,6 +1,6 @@
 var exit = require('../../../../lib/worker/proto/exit');
 
-describe(' - unit/worker/proto/exit:', function () {
+describe('unit/worker/proto/exit:', function () {
   var WorkerProcess;
   var workerProcess;
 

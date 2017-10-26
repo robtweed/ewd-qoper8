@@ -35,11 +35,13 @@
   },
   "homepage": "https://github.com/robtweed/ewd-qoper8#readme",
   "devDependencies": {
-    "coveralls": "^2.13.1",
-    "jasmine": "^2.7.0",
+    "coveralls": "^3.0.0",
+    "jasmine": "^2.8.0",
     "jasmine-spec-reporter": "^4.1.1",
+    "jasmine-spy-matchers": "^1.2.0",
     "jshint": "^2.9.5",
-    "nyc": "^11.1.0",
+    "mockery": "^2.1.0",
+    "nyc": "^11.2.1",
     "pre-commit": "^1.2.2",
     "rewire": "^2.5.2"
   },

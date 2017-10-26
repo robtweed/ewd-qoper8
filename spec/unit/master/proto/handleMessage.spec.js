@@ -1,6 +1,6 @@
 var handleMessage = require('../../../../lib/master/proto/handleMessage');
 
-describe(' - unit/master/proto/handleMessage:', function () {
+describe('unit/master/proto/handleMessage:', function () {
   var MasterProcess;
   var masterProcess;
 

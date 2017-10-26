@@ -1,6 +1,6 @@
 var processQueue = require('../../../../lib/master/proto/processQueue');
 
-describe(' - unit/master/proto/processQueue:', function () {
+describe('unit/master/proto/processQueue:', function () {
   var MasterProcess;
   var masterProcess;
 

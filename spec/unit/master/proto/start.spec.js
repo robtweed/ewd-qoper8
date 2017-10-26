@@ -2,11 +2,18 @@ var events = require('events');
 var rewire = require('rewire');
 var start = rewire('../../../../lib/master/proto/start');
 
-describe(' - unit/master/proto/start:', function () {
+describe('unit/master/proto/start:', function () {
   var MasterProcess;
   var WorkerProcess;
   var masterProcess;
   var removeLastListener;
+  var checkWorkerPool;
+  var createWorkerProcessModule;
+
+  var revert = function (obj) {
+    obj.__revert__();
+    delete obj.__revert__;
+  };
 
   beforeAll(function () {
     removeLastListener = function (target, eventName) {
@@ -42,8 +49,11 @@ describe(' - unit/master/proto/start:', function () {
   beforeEach(function () {
     spyOn(process, 'on').and.callThrough();
 
-    start.__set__('checkWorkerPool', jasmine.createSpy());
-    start.__set__('createWorkerProcessModule', jasmine.createSpy());
+    checkWorkerPool = jasmine.createSpy();
+    checkWorkerPool.__revert__ = start.__set__('checkWorkerPool', checkWorkerPool);
+
+    createWorkerProcessModule = jasmine.createSpy();
+    createWorkerProcessModule.__revert__ = start.__set__('createWorkerProcessModule', createWorkerProcessModule);
 
     masterProcess = new MasterProcess();
   });
@@ -54,6 +64,9 @@ describe(' - unit/master/proto/start:', function () {
 
     removeLastListener(process, 'SIGINT');
     removeLastListener(process, 'SIGTERM');
+
+    revert(checkWorkerPool);
+    revert(createWorkerProcessModule);
   });
 
   it('should call #checkWorkerPool', function () {
@@ -61,8 +74,7 @@ describe(' - unit/master/proto/start:', function () {
     masterProcess.start();
 
     // ASSERT
-    var spy = start.__get__('checkWorkerPool');
-    expect(spy).toHaveBeenCalled();
+    expect(checkWorkerPool).toHaveBeenCalledWithContext(masterProcess);
   });
 
   it('should call #createWorkerProcessModule', function () {
@@ -70,8 +82,7 @@ describe(' - unit/master/proto/start:', function () {
     masterProcess.start();
 
     // ASSERT
-    var spy = start.__get__('createWorkerProcessModule');
-    expect(spy).toHaveBeenCalled();
+    expect(createWorkerProcessModule).toHaveBeenCalledWithContext(masterProcess);
   });
 
   describe('SIGINT', function () {

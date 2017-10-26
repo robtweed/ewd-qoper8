@@ -1,7 +1,7 @@
 var events = require('events');
 var messageHandler = require('../../../../lib/worker/proto/messageHandler');
 
-describe(' - unit/worker/proto/messageHandler:', function () {
+describe('unit/worker/proto/messageHandler:', function () {
   var WorkerProcess;
   var workerProcess;
 

@@ -1,6 +1,6 @@
 var setWorkerIdleLimit = require('../../../../lib/master/proto/setWorkerIdleLimit');
 
-describe(' - unit/master/proto/setWorkerIdleLimit:', function () {
+describe('unit/master/proto/setWorkerIdleLimit:', function () {
   var MasterProcess;
   var masterProcess;
 

@@ -1,6 +1,6 @@
 var getWorkerPids = require('../../../../lib/master/proto/getWorkerPids');
 
-describe(' - unit/master/proto/getWorkerPids:', function () {
+describe('unit/master/proto/getWorkerPids:', function () {
   var MasterProcess;
   var masterProcess;
 

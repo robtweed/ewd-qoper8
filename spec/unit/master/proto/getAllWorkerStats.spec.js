@@ -1,6 +1,6 @@
 var getAllWorkerStats = require('../../../../lib/master/proto/getAllWorkerStats');
 
-describe(' - unit/master/proto/getAllWorkerStats:', function () {
+describe('unit/master/proto/getAllWorkerStats:', function () {
   var MasterProcess;
   var masterProcess;
 

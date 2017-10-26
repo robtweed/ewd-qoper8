@@ -1,9 +1,9 @@
-var path = require('path');
+var mockery = require('mockery');
 var events = require('events');
 var rewire = require('rewire');
 var init = rewire('../../../../lib/worker/proto/init');
 
-describe(' - unit/worker/proto/init:', function () {
+describe('unit/worker/proto/init:', function () {
   var WorkerProcess;
   var workerProcess;
   var removeLastListener;
@@ -24,6 +24,12 @@ describe(' - unit/worker/proto/init:', function () {
 
     WorkerProcess.prototype = Object.create(events.EventEmitter.prototype);
     WorkerProcess.prototype.constructor = WorkerProcess;
+
+    mockery.enable();
+  });
+
+  afterAll(function () {
+    mockery.disable();
   });
 
   beforeEach(function () {
@@ -47,54 +53,41 @@ describe(' - unit/worker/proto/init:', function () {
     removeLastListener(process, 'uncaughtException');
 
     jasmine.clock().uninstall();
-
     process.argv = originalArgv;
+
+    mockery.deregisterAll();
   });
 
   describe('workerListeners', function () {
     describe('workerModule', function () {
-      beforeEach(function () {
-        var workerModule = path.join(process.cwd(), 'spec/unit/fixtures/worker-module');
-        process.argv = ['node', 'test.js', workerModule];
-      });
-
       it('should init worker process message handler', function () {
         // ARRANGE
-        var messageObj = {};
-        var sendCallback = jasmine.createSpy();
-        var finishedCallback = jasmine.createSpy();
+        var workerModule = jasmine.createSpy();
+        mockery.registerMock('foo', workerModule);
+
+        process.argv = ['node', 'test.js', 'foo'];
 
         // ACT
         workerProcess.init();
-        workerProcess.emit('message', messageObj, sendCallback, finishedCallback);
 
         // ASSERT
-        expect(finishedCallback).toHaveBeenCalledWith({
-          type: 'test-worker-module'
-        });
+        expect(workerModule).toHaveBeenCalledWithContext(workerProcess);
       });
     });
 
     describe('workerSubModule', function () {
-      beforeEach(function () {
-        var workerSubModule = path.join(process.cwd(), 'spec/unit/fixtures/worker-sub-module.handler');
-        process.argv = ['node', 'test.js', workerSubModule];
-      });
-
       it('should init worker process message handler', function () {
         // ARRANGE
-        var messageObj = {};
-        var sendCallback = jasmine.createSpy();
-        var finishedCallback = jasmine.createSpy();
+        var workerModule = jasmine.createSpyObj(['bar']);
+        mockery.registerMock('foo', workerModule);
+
+        process.argv = ['node', 'test.js', 'foo.bar'];
 
         // ACT
         workerProcess.init();
-        workerProcess.emit('message', messageObj, sendCallback, finishedCallback);
 
         // ASSERT
-        expect(finishedCallback).toHaveBeenCalledWith({
-          type: 'test-worker-sub-module'
-        });
+        expect(workerModule.bar).toHaveBeenCalledWithContext(workerProcess);
       });
     });
   });
@@ -204,7 +197,7 @@ describe(' - unit/worker/proto/init:', function () {
         process.emit('message', messageObj);
 
         // ASSERT
-        expect(callback).toHaveBeenCalledWith(messageObj);
+        expect(callback).toHaveBeenCalledWithContext(workerProcess, messageObj);
 
         revert();
       });

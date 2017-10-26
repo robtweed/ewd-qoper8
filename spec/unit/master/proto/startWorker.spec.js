@@ -2,7 +2,7 @@ var cp = require('child_process');
 var events = require('events');
 var startWorker = require('../../../../lib/master/proto/startWorker');
 
-describe(' - unit/master/proto/startWorker:', function () {
+describe('unit/master/proto/startWorker:', function () {
   var WorkerProcess;
   var MasterProcess;
   var workerProcess1;

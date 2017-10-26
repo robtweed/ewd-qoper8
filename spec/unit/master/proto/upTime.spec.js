@@ -1,6 +1,6 @@
 var upTime = require('../../../../lib/master/proto/upTime');
 
-describe(' - unit/master/proto/upTime:', function () {
+describe('unit/master/proto/upTime:', function () {
   var MasterProcess;
   var masterProcess;
   var days;
