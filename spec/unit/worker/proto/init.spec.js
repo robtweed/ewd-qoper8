@@ -117,7 +117,9 @@ describe(' - unit/worker/proto/init:', function () {
       workerProcess.init();
 
       // ASSERT
-      expect(workerProcess.suppressLog).toEqual({});
+      expect(workerProcess.suppressLog).toEqual({
+        'qoper8-getStats': true
+      });
     });
   });
 
@@ -141,6 +143,7 @@ describe(' - unit/worker/proto/init:', function () {
 
         // ASSERT
         expect(workerProcess.suppressLog).toEqual({
+          'qoper8-getStats': true,
           foo: true,
           bar: true
         });
