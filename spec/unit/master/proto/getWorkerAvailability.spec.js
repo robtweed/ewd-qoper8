@@ -1,6 +1,6 @@
 var getWorkerAvailability = require('../../../../lib/master/proto/getWorkerAvailability');
 
-describe(' - unit/master/proto/getWorkerAvailability:', function () {
+describe('unit/master/proto/getWorkerAvailability:', function () {
   var MasterProcess;
   var WorkerProcess;
   var masterProcess;

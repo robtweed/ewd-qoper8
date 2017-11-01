@@ -1,6 +1,6 @@
 var hasStarted = require('../../../../lib/worker/proto/hasStarted');
 
-describe(' - unit/worker/proto/hasStarted:', function () {
+describe('unit/worker/proto/hasStarted:', function () {
   var WorkerProcess;
   var workerProcess;
 

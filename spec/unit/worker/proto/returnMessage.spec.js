@@ -1,6 +1,6 @@
 var returnMessage = require('../../../../lib/worker/proto/returnMessage');
 
-describe(' - unit/worker/proto/returnMessage:', function () {
+describe('unit/worker/proto/returnMessage:', function () {
   var WorkerProcess;
   var workerProcess;
 

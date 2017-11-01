@@ -1,6 +1,6 @@
 var sendMessage = require('../../../../lib/worker/proto/sendMessage');
 
-describe(' - unit/worker/proto/sendMessage:', function () {
+describe('unit/worker/proto/sendMessage:', function () {
   var WorkerProcess;
   var workerProcess;
 
@@ -43,7 +43,7 @@ describe(' - unit/worker/proto/sendMessage:', function () {
     });
   });
 
-  describe(' when suppressLog enabled', function() {
+  describe('when suppressLog enabled', function() {
     it('should call process.send with passing `dontLog`', function () {
       // ARRANGE
       var type = 'foo';

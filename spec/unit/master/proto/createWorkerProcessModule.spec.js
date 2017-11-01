@@ -1,11 +1,15 @@
 var rewire = require('rewire');
 var createWorkerProcessModule = rewire('../../../../lib/master/proto/createWorkerProcessModule');
 
-describe(' - unit/master/proto/createWorkerProcessModule:', function () {
+describe('unit/master/proto/createWorkerProcessModule:', function () {
   var MasterProcess;
   var masterProcess;
   var fsMock;
-  var revert;
+
+  var revert = function (obj) {
+    obj.__revert__();
+    delete obj.__revert__;
+  };
 
   beforeAll(function () {
     fsMock = {
@@ -26,12 +30,12 @@ describe(' - unit/master/proto/createWorkerProcessModule:', function () {
   });
 
   beforeEach(function () {
-    revert = createWorkerProcessModule.__set__('fs', fsMock);
+    fsMock.__revert__ = createWorkerProcessModule.__set__('fs', fsMock);
     masterProcess = new MasterProcess();
   });
 
   afterEach(function () {
-    revert();
+    revert(fsMock);
     masterProcess = null;
   });
 

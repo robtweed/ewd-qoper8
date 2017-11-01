@@ -1,6 +1,6 @@
 var toggleLogging = require('../../../../lib/master/proto/toggleLogging');
 
-describe(' - unit/master/proto/toggleLogging:', function () {
+describe('unit/master/proto/toggleLogging:', function () {
   var MasterProcess;
   var masterProcess;
 

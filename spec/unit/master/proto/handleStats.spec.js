@@ -1,6 +1,6 @@
 var handleStats = require('../../../../lib/master/proto/handleStats');
 
-describe(' - unit/master/proto/handleStats:', function () {
+describe('unit/master/proto/handleStats:', function () {
   var MasterProcess;
   var masterProcess;
 
@@ -40,7 +40,7 @@ describe(' - unit/master/proto/handleStats:', function () {
     expect(masterProcess.getWorkerPids).toHaveBeenCalled();
   });
 
-  describe(' when NO workers exist', function () {
+  describe('when NO workers exist', function () {
     it('should call #getStats and return callback with correct arguments', function () {
       // ARRANGE
       var callback = jasmine.createSpy();
@@ -57,7 +57,7 @@ describe(' - unit/master/proto/handleStats:', function () {
     });
   });
 
-  describe(' when at least one worker exists', function () {
+  describe('when at least one worker exists', function () {
     beforeEach(function () {
       masterProcess = new MasterProcess();
       masterProcess.getWorkerPids.and.returnValue([10]);

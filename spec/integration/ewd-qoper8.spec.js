@@ -3,7 +3,7 @@
 var qoper8 = require('../../');
 var loaderFile = require('./fixtures/loaderFile');
 
-describe(' - integration/ewd-qoper8: ', function () {
+describe('integration/ewd-qoper8: ', function () {
   var q;
   var stopTimeout = 2000;
 

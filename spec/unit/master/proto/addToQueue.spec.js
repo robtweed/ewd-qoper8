@@ -1,6 +1,6 @@
 var addToQueue = require('../../../../lib/master/proto/addToQueue');
 
-describe(' - unit/master/proto/addToQueue:', function () {
+describe('unit/master/proto/addToQueue:', function () {
   var MasterProcess;
   var masterProcess;
 
@@ -29,7 +29,7 @@ describe(' - unit/master/proto/addToQueue:', function () {
     expect(masterProcess.emit).toHaveBeenCalledWith('toQueue', requestObj);
   });
 
-  describe(' when handler NOT found', function () {
+  describe('when handler NOT found', function () {
     beforeEach(function () {
       masterProcess = new MasterProcess();
       masterProcess.emit.and.returnValue(false);

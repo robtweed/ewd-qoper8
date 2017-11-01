@@ -1,6 +1,6 @@
 var checkWorkerPool = require('../../../../lib/master/proto/checkWorkerPool');
 
-describe(' - unit/master/proto/checkWorkerPool:', function () {
+describe('unit/master/proto/checkWorkerPool:', function () {
   var MasterProcess;
   var masterProcess;
 

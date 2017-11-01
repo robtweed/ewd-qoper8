@@ -1,6 +1,6 @@
 var sendRequestToWorker = require('../../../../lib/master/proto/sendRequestToWorker');
 
-describe(' - unit/master/proto/sendRequestToWorker:', function () {
+describe('unit/master/proto/sendRequestToWorker:', function () {
   var MasterProcess;
   var masterProcess;
 
@@ -22,6 +22,17 @@ describe(' - unit/master/proto/sendRequestToWorker:', function () {
 
   beforeEach(function () {
     masterProcess = new MasterProcess();
+  });
+
+  it('should do nothing', function () {
+    // ARRANGE
+    masterProcess.queue = [];
+
+    // ACT
+    masterProcess.sendRequestToWorker();
+
+    // ASSERT
+    expect(masterProcess.emit).not.toHaveBeenCalled();
   });
 
   it('should dequeue item from queue', function () {

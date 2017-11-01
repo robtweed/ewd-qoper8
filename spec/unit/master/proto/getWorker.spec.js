@@ -1,6 +1,6 @@
 var getWorker = require('../../../../lib/master/proto/getWorker');
 
-describe(' - unit/master/proto/getWorker:', function () {
+describe('unit/master/proto/getWorker:', function () {
   var MasterProcess;
   var WorkerProcess;
   var masterProcess;
@@ -54,7 +54,7 @@ describe(' - unit/master/proto/getWorker:', function () {
     expect(worker.time).toBe(1483228800000);
   });
 
-  describe(' when no available workers', function () {
+  describe('when no available workers', function () {
     beforeEach(function () {
       masterProcess.worker.process[20].isAvailable = false;
     });

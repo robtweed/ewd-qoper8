@@ -1,6 +1,6 @@
 var hasFinished = require('../../../../lib/worker/proto/hasFinished');
 
-describe(' - unit/worker/proto/hasFinished:', function () {
+describe('unit/worker/proto/hasFinished:', function () {
   var WorkerProcess;
   var workerProcess;
 
@@ -40,7 +40,7 @@ describe(' - unit/worker/proto/hasFinished:', function () {
     });
   });
 
-  describe(' when suppressLog enabled', function() {
+  describe('when suppressLog enabled', function() {
     it('should call process.send with passing `dontLog`', function () {
       // ARRANGE
       var type = 'foo';
