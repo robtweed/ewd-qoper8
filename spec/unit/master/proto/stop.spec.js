@@ -1,5 +1,6 @@
 var events = require('events');
 var stop = require('../../../../lib/master/proto/stop');
+var deq = require('double-ended-queue');
 
 describe('unit/master/proto/stop:', function () {
   var WorkerProcess;
@@ -17,6 +18,7 @@ describe('unit/master/proto/stop:', function () {
     WorkerProcess.prototype.constructor = WorkerProcess;
 
     MasterProcess = function () {
+      this.queue = new deq(20000);
       this.exitOnStop = true;
       this.shutdownDelay = 5000;
       this.emit = jasmine.createSpy();
