@@ -6,11 +6,11 @@ describe('unit/master/proto/sendRequestToWorker:', function () {
 
   beforeAll(function () {
     MasterProcess = function () {
-      this.queue = [
+      this.queue.push(
         {
           type: 'foo'
         }
-      ];
+      );
       this.worker = {
         process: {}
       };
@@ -26,7 +26,7 @@ describe('unit/master/proto/sendRequestToWorker:', function () {
 
   it('should do nothing', function () {
     // ARRANGE
-    masterProcess.queue = [];
+    masterProcess.queue.clear();
 
     // ACT
     masterProcess.sendRequestToWorker();
@@ -43,7 +43,7 @@ describe('unit/master/proto/sendRequestToWorker:', function () {
     masterProcess.sendRequestToWorker(pid);
 
     // ASSERT
-    expect(masterProcess.queue).toEqual([]);
+    expect(masterProcess.queue.isEmpty()).toEqual(true);
   });
 
   it('should call `beforeDispatch` event with correct arguments', function () {

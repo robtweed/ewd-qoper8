@@ -68,16 +68,16 @@ describe('unit/master/proto/stop:', function () {
 
     it('should clean internal state', function () {
       // ARRANGE
-      masterProcess.queue = [{
+      masterProcess.queue.push({
         type: 'foo'
-      }];
+      });
 
       // ACT
       masterProcess.stop();
 
       // ASSERT
       expect(masterProcess.stopping).toBeTruthy();
-      expect(masterProcess.queue).toEqual([]);
+      expect(masterProcess.queue.isEmpty()).toEqual(true);
     });
 
     it('should stop checkWorkerPoolTimer', function () {

@@ -6,11 +6,11 @@ describe('unit/master/proto/processQueue:', function () {
 
   beforeAll(function () {
     MasterProcess = function () {
-      this.queue = [
+      this.queue.push(
         {
           type: 'foo'
         }
-      ];
+      );
       this.worker = {
         poolSize: 2
       };
@@ -41,7 +41,7 @@ describe('unit/master/proto/processQueue:', function () {
 
   describe('When queue is empty', function () {
     beforeEach(function () {
-      masterProcess.queue = [];
+      masterProcess.queue.clear();
     });
 
     describe('and customQueue falsy', function () {
@@ -89,11 +89,11 @@ describe('unit/master/proto/processQueue:', function () {
 
       beforeEach(function () {
         masterProcess.log = true;
-        masterProcess.queue = [
+        masterProcess.queue.push(
           {
             type: 'foo'
           }
-        ];
+        );
 
         // create un-spied version of the function to call to avoid the spy loop
         processQueue = masterProcess.processQueue.bind(masterProcess);
@@ -125,7 +125,7 @@ describe('unit/master/proto/processQueue:', function () {
 
       describe('and there is NOT requests on the queue', function () {
         beforeEach(function () {
-          masterProcess.queue = [];
+          masterProcess.queue.clear();
         });
 
         it('should NOT run #processQueue again', function () {
