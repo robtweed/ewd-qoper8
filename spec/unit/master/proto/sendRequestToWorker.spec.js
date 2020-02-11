@@ -1,4 +1,5 @@
 var sendRequestToWorker = require('../../../../lib/master/proto/sendRequestToWorker');
+var deq = require('double-ended-queue');
 
 describe('unit/master/proto/sendRequestToWorker:', function () {
   var MasterProcess;
@@ -6,6 +7,7 @@ describe('unit/master/proto/sendRequestToWorker:', function () {
 
   beforeAll(function () {
     MasterProcess = function () {
+      this.queue = new deq(20000);
       this.queue.push(
         {
           type: 'foo'
