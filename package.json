@@ -1,8 +1,8 @@
 {
   "name": "ewd-qoper8",
-  "version": "3.17.1",
+  "version": "3.18.0",
   "config": {
-    "date": "5 December 2019"
+    "date": "11 February 2020"
   },
   "description": "High-performance Message Queue for Node.js",
   "main": "index.js",
@@ -48,5 +48,8 @@
   "pre-commit": [
     "lint",
     "test:unit"
-  ]
+  ],
+  "dependencies": {
+    "double-ended-queue": ""
+  }
 }
