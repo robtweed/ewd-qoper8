@@ -287,13 +287,13 @@ describe('unit/master/proto/startWorker:', function () {
       it('should rebuild array of current worker process pids', function () {
         // ARRANGE
         masterProcess.startWorker();
-        expect(masterProcess.worker.list).toEqual(['10100', '10200']);
+        expect(masterProcess.worker.list).toEqual([10100, 10200]);
 
         // ACT
         workerProcess1.emit('exit');
 
         // ASSERT
-        expect(masterProcess.worker.list).toEqual(['10200']);
+        expect(masterProcess.worker.list).toEqual([10200]);
       });
     });
   });
