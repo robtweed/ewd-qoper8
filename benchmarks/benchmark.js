@@ -28,8 +28,9 @@
 
 */
 
-var qoper8 = require('ewd-qoper8');
+var qoper8 = require('../');
 var q = new qoper8.masterProcess();
+var loaderFile = require('./loaderFile');
 
 var test = {
   poolSize: parseInt(process.argv[2]) || 1,
@@ -71,7 +72,7 @@ function addMessages(no, wait) {
       q.addToQueue(messageObj);
     }
     // add another block of message to the queue
-    if (test.msgNo < test.max) addMessages.call(q, no, wait);  
+    if (test.msgNo < test.max) addMessages.call(q, no, wait);
   }, wait);
 };
 
@@ -79,6 +80,7 @@ function addMessages(no, wait) {
 q.on('start', function() {
   this.log = false;
   this.setWorkerPoolSize(test.poolSize);
+  this.worker.loaderText = loaderFile;
   test.msgNo = 0;
   test.batchNo = 0;
   test.maxQueueLength = 0;

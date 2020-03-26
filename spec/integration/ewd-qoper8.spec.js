@@ -13,6 +13,7 @@ describe('integration/ewd-qoper8: ', function () {
     q.on('start', function () {
       this.exitOnStop = false;
       this.worker.loaderText = loaderFile;
+      this.checkWorkerPoolDelay = 1000;
     });
 
     q.on('started', function() {

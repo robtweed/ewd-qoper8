@@ -69,6 +69,18 @@ describe('unit/master/proto/start:', function () {
     revert(createWorkerProcessModule);
   });
 
+
+  it('should emit start', function () {
+    // ARRANGE
+    spyOn(masterProcess, 'emit');
+
+    // ACT
+    masterProcess.start();
+
+    // ASSERT
+    expect(masterProcess.emit).toHaveBeenCalledWith('start');
+  });
+
   it('should call #checkWorkerPool', function () {
     // ACT
     masterProcess.start();
@@ -167,17 +179,6 @@ describe('unit/master/proto/start:', function () {
         });
       });
     });
-  });
-
-  it('should emit start', function () {
-    // ARRANGE
-    spyOn(masterProcess, 'emit');
-
-    // ACT
-    masterProcess.start();
-
-    // ASSERT
-    expect(masterProcess.emit).toHaveBeenCalledWith('start');
   });
 
   it('should emit started', function () {
